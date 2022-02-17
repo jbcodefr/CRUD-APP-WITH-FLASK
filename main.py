@@ -38,11 +38,11 @@ def insert():
         check_email=User.query.filter_by(email=email).first()
         if check_username:
             flash('username already Used ',category='error') 
-        if check_email:
+        elif check_email:
             flash('Email already Used ',category='error') 
-        if len(email)<3:
+        elif len(email)<3:
             flash('_> Email > 4 charac',category='error')
-        if len(username)<2:
+        elif len(username)<2:
             flash('_> Username > 4 charac',category='error')
         else:
             new_user=User(email=email,username=username,id=None)
