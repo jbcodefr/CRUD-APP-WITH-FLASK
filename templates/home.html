@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock%}
+
+{% block content %}
+    <h6 class="text-muted" >userList</h6>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {%for d in userlist%}
+            <tr>
+            <th scope="row">{{d.id}}</th>
+            <td>{{d.email}}</td>
+            <td>{{d.username}}</td>
+            <td><a href="/update/{{d.id}}" class="btn btn-secondary">Edit</a> | <a href="/delete/{{d.id}}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        {%endfor%}    
+        </tbody>
+
+    </table>
+{% endblock%}

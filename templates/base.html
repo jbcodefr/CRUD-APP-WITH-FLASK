@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">  
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+        <title class="text-muted">
+            {% block title %}Base{% endblock%}
+        </title>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" id="Home" aria-current="page" href="/"><i class="bi bi-house-fill"></i> Home </a>
+                    <a class="nav-link" id="insert" href="/insert"><i class="bi bi-person-plus"></i> Add</a>
+                </div>
+                </div>
+            </div>
+        </nav>
+        {% with messages = get_flashed_messages(with_categories=true)%}
+            {% if messages%}
+                {% for category,message in messages%}
+                    {% if category=='error'%}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{message}}</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% elif  category=='warning'%}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{message}}</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    {% else %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{message}}</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {%endif%}
+                {% endfor %}
+            {%endif%}    
+        {% endwith %}
+        <div class="container" id="body"> 
+            {% block content %}
+        
+            {% endblock%}
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static',filename='index.js')}}"
+        ></script>
+        
+    </body>
+</html>
